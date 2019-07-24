@@ -74,6 +74,30 @@ namespace WebApiProject.Migrations
                     b.ToTable("Orders_Products");
                 });
 
+            modelBuilder.Entity("WebApiProject.Models.Permission", b =>
+                {
+                    b.Property<int>("index")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("pageName");
+
+                    b.Property<string>("pagePermission");
+
+                    b.Property<string>("pageUrl");
+
+                    b.HasKey("index");
+
+                    b.ToTable("Permissions");
+
+                    b.HasData(
+                        new { index = 1, pageName = "front-page", pagePermission = "true", pageUrl = "http://localhost:4000/front-page" },
+                        new { index = 2, pageName = "showresult", pagePermission = "true", pageUrl = "http://localhost:4000/showresult" },
+                        new { index = 3, pageName = "home", pagePermission = "false", pageUrl = "http://localhost:4000/#" },
+                        new { index = 4, pageName = "edit", pagePermission = "false", pageUrl = "http://localhost:4000/edit-data" }
+                    );
+                });
+
             modelBuilder.Entity("WebApiProject.Models.Person", b =>
                 {
                     b.Property<int>("Id")

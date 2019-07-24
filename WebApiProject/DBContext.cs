@@ -63,7 +63,38 @@ namespace WebApiProject.Data
 
 
                 );
-            // base.OnModelCreating(builder);
+            builder.Entity<Permission>().HasData(
+                new Permission
+                {
+                    index = 1,
+                    pageName = "front-page",
+                    pageUrl = "http://localhost:4000/front-page",
+                    pagePermission = "true"
+                },
+                 new Permission
+                 {
+                     index=2,
+                     pageName = "showresult",
+                     pageUrl = "http://localhost:4000/showresult",
+                     pagePermission = "true"
+                 },
+                  new Permission
+                  {
+                      index=3,
+                      pageName = "home",
+                      pageUrl = "http://localhost:4000/#",
+                      pagePermission = "false"
+                  },
+                   new Permission
+                   {
+                       index = 4,
+                       pageName = "edit",
+                       pageUrl = "http://localhost:4000/edit-data",
+                       pagePermission = "false"
+                   }
+                );
+
+
         }
 
 
@@ -83,6 +114,7 @@ namespace WebApiProject.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order_Products> Orders_Products { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
     }
 }
