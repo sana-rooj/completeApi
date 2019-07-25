@@ -94,6 +94,30 @@ namespace WebApiProject.Data
                    }
                 );
 
+            builder.Entity<UserLoginInfo>().HasData(
+              new UserLoginInfo
+              {
+                  SerialNo = 1,
+                  Email = "sanaaroojbutt@hotmail.com",
+                  Password = "111111"
+              },
+              new UserLoginInfo
+              {
+                  SerialNo = 2,
+                  Email = "sahar@hotmail.com",
+                  Password = "222222"
+              },
+               new UserLoginInfo
+               {
+                   SerialNo = 3,
+                   Email = "alina@hotmail.com",
+                   Password = "333333"
+               }
+
+
+
+              ); 
+
 
         }
 
@@ -106,7 +130,7 @@ namespace WebApiProject.Data
 
         //public DbSet<ProductRepository> product { get; set; }
         public DbSet<RegisteredUser> RegisteredUsers { get; set; }
-        //public DbSet<Movie> Movies { get; set; }
+        public DbSet<UserLoginInfo> UserLoginInfo { get; set; }
 
         public DbSet<ToDoItem> ToDoItems { get; set; }
         public object Mapping { get; internal set; }
