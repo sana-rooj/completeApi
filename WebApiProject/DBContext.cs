@@ -9,6 +9,8 @@ namespace WebApiProject.Data
 {
     public class DBContext:DbContext
     {
+        private Encypt encyptObj = new Encypt();
+       
         public DBContext(DbContextOptions options) : base(options)
         {
             
@@ -99,19 +101,19 @@ namespace WebApiProject.Data
               {
                   SerialNo = 1,
                   Email = "sanaaroojbutt@hotmail.com",
-                  Password = "111111"
+                  Password = encyptObj.EncryptString("111111", "E546C8DF278CD5931069B522E695D4F2")
               },
               new UserLoginInfo
               {
                   SerialNo = 2,
                   Email = "sahar@hotmail.com",
-                  Password = "222222"
+                  Password = encyptObj.EncryptString("222222", "E546C8DF278CD5931069B522E695D4F2")
               },
                new UserLoginInfo
                {
                    SerialNo = 3,
                    Email = "alina@hotmail.com",
-                   Password = "333333"
+                   Password = encyptObj.EncryptString("333333", "E546C8DF278CD5931069B522E695D4F2")
                }
 
 

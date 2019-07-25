@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiProject.Data;
 
 namespace WebApiProject.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20190725165343_encrypt")]
+    partial class encrypt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,9 +256,9 @@ namespace WebApiProject.Migrations
                     b.ToTable("UserLoginInfo");
 
                     b.HasData(
-                        new { SerialNo = 1, Email = "sanaaroojbutt@hotmail.com", Password = "7nMpYVDoXMIAOnrp9dyuuRVdC7mRE9tHf/394KBwUkQ=" },
-                        new { SerialNo = 2, Email = "sahar@hotmail.com", Password = "0AE08S4IHdYwEUvl881oq4+7KAG66/OImhsUDrmJrP0=" },
-                        new { SerialNo = 3, Email = "alina@hotmail.com", Password = "2knL4xW6bRbZXOTfMjjtFIAdt3Cp4AV0ShoWZO1kzcE=" }
+                        new { SerialNo = 1, Email = "sanaaroojbutt@hotmail.com", Password = "9FE4UYePyEkwIsNUsSjtgGIFJt7KXuCRdSqwg0hlRNo=" },
+                        new { SerialNo = 2, Email = "sahar@hotmail.com", Password = "222222" },
+                        new { SerialNo = 3, Email = "alina@hotmail.com", Password = "333333" }
                     );
                 });
 

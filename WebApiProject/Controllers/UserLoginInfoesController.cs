@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -128,19 +131,22 @@ namespace WebApiProject.Controllers
         [Microsoft.AspNetCore.Mvc.HttpPost("check")]
         public String CheckUserAsync([Microsoft.AspNetCore.Mvc.FromBody] UserLoginInfo userLoginInfo)
         {
+            Encypt encyptObj = new Encypt();
             // var user = await _context.UserLoginInfo.FindAsync(userLoginInfo.SerialNo);
             UserLoginInfo user = _context.UserLoginInfo.SingleOrDefault(userdata => userdata.Email == userLoginInfo.Email);
             var s = user;
-            if (user == null )
+            if (user == null)
             {
                 return "not found";
             }
-            if(user.Password !=userLoginInfo.Password)
+            if (encyptObj.DecryptString(user.Password, "E546C8DF278CD5931069B522E695D4F2") != userLoginInfo.Password)
             {
                 return "invalid passowrd";
             }
             return "found";
-      
+
         }
+   
+
     }
 }
