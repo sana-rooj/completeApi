@@ -11,7 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using WebApiProject.Data;
 using WebApiProject.Models;
-
+using MailKit.Net.Smtp;
+using MimeKit;
 namespace WebApiProject.Controllers
 {
     [Route("api/[controller]")]
@@ -146,7 +147,51 @@ namespace WebApiProject.Controllers
             return "found";
 
         }
-   
+        // GET: api/UserLoginInfoes
+        [HttpPost("forget")]
+        public void forgetlink([FromBody] UserLoginInfo user)
+        {
+            string emailToSet = user.Email;
+            MimeMessage message = new MimeMessage();
+
+            MailboxAddress from = new MailboxAddress("AngularApp",
+            "Angular505@gmail.com");
+            message.From.Add(from);
+
+            MailboxAddress to = new MailboxAddress("User",
+            emailToSet);
+            message.To.Add(to);
+
+            message.Subject = "Reset Password";
+            BodyBuilder bodyBuilder = new BodyBuilder();
+            bodyBuilder.TextBody = "Please follow the link to Change password http://localhost:4000/forget-password";
+            message.Body = bodyBuilder.ToMessageBody();
+            SmtpClient client = new SmtpClient();
+            client.Connect("smtp.gmail.com", 587 , false);
+            client.Authenticate("angular505@gmail.com", "Angular12*");
+            client.Send(message);
+            client.Disconnect(true);
+            client.Dispose();
+        }
+        [HttpPut("reset")]
+        public UserLoginInfo PutAsync([FromBody] UserLoginInfo userLoginInfo)
+        {
+            Encypt Eobj = new Encypt();
+            UserLoginInfo user = _context.UserLoginInfo.SingleOrDefault(userdata => userdata.Email == userLoginInfo.Email);
+            if(user==null) {
+                return null;
+
+            }
+            userLoginInfo.Password = Eobj.EncryptString(userLoginInfo.Password , "E546C8DF278CD5931069B522E695D4F2");
+            UserLoginInfo EditUser = new UserLoginInfo();
+            EditUser.SerialNo = user.SerialNo;
+            EditUser.Email = userLoginInfo.Email;
+            EditUser.Password = userLoginInfo.Password;
+            return EditUser;
+           
+
+        }
+
 
     }
 }
